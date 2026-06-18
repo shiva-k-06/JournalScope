@@ -199,10 +199,45 @@ a{color:inherit;text-decoration:none}
   .hero-title{font-size:1.9rem}
   .tab-btn span{display:none}
   .search-kbd{display:none}
-  .filter-toggle{display:block}
+  
+  /* FIX 1: Makes the ⚙ Filters button sticky at the top of the screen on mobile */
+  .filter-toggle {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  
   .sidebar{position:static}
   .sidebar-inner{display:none}
   .sidebar-inner.open{display:block}
+
+  /* FIX 2: Converts the metric row into a 2x2 grid box so it fits on mobile screens */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius-lg);
+    max-width: 340px;
+    margin: 0 auto 2rem;
+    padding: 0.5rem;
+  }
+  
+  .hero-stat {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    padding: 0.6rem 0.2rem;
+    font-size: 0.85rem;
+  }
+
+  /* Draws the inner crosshair lines for the 2x2 grid layout */
+  .hero-stat:nth-child(1), .hero-stat:nth-child(3) {
+    border-right: 1px solid rgba(255,255,255,.1);
+  }
+
+  .hero-stat:nth-child(3), .hero-stat:nth-child(4) {
+    border-bottom: none;
+  }
 }
 </style>
 </head>
