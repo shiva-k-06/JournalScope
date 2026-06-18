@@ -192,12 +192,17 @@ a{color:inherit;text-decoration:none}
 /* ── FOOTER ── */
 .site-footer{text-align:center;padding:1.5rem;font-size:.85rem;color:var(--text-3);border-top:1px solid var(--border);margin-top:1rem}
 
+.filter-toggle{display:none;width:100%;padding:.75rem 1rem;background:var(--navy);color:#fff;border:none;border-radius:var(--radius);font-size:.95rem;font-weight:600;font-family:'DM Sans',sans-serif;cursor:pointer;margin-bottom:.75rem;text-align:left}
 @media(max-width:768px){
   .panel-search.active,.main{grid-template-columns:1fr}
   .info-grid,.chart-grid-2{grid-template-columns:1fr}
   .hero-title{font-size:1.9rem}
   .tab-btn span{display:none}
   .search-kbd{display:none}
+  .filter-toggle{display:block}
+  .sidebar{position:static}
+  .sidebar-inner{display:none}
+  .sidebar-inner.open{display:block}
 }
 </style>
 </head>
@@ -250,7 +255,9 @@ a{color:inherit;text-decoration:none}
   <div class="chips-row" id="chipsRow"></div>
   <div class="main">
     <!-- SIDEBAR -->
-    <aside class="sidebar">
+   <aside class="sidebar">
+      <button class="filter-toggle" onclick="toggleFilters(this)">⚙ Filters <span id="filterArrow">▼</span></button>
+      <div class="sidebar-inner" id="sidebarInner">
       <div class="sidebar-hdr">
         <span class="sidebar-hdr-title">Filters</span>
         <button class="sidebar-clear" onclick="clearFilters()">Clear all</button>
@@ -308,6 +315,7 @@ a{color:inherit;text-decoration:none}
         </div>
         <input type="hidden" id="publisherFilter" value="">
         <div class="filter-hint" id="pubHint" style="display:none">↳ Narrowed by region / country</div>
+      </div>
       </div>
     </aside>
 
@@ -413,6 +421,12 @@ const PUB_COUNTS = {};
 RAW.forEach(r => { if(r.publisher) PUB_COUNTS[r.publisher] = (PUB_COUNTS[r.publisher]||0)+1; });
 
 let filtered = [], currentPage = 1, pubHl = -1, activePubs = ALL_PUBLISHERS;
+
+function toggleFilters(btn){
+  const inner=document.getElementById('sidebarInner');
+  inner.classList.toggle('open');
+  document.getElementById('filterArrow').textContent=inner.classList.contains('open')?'▲':'▼';
+}
 
 // ── TABS ──────────────────────────────────────────────
 function showTab(name, btn) {
