@@ -209,8 +209,8 @@ a{color:inherit;text-decoration:none}
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   }
   
-  .sidebar{position:static}
-  .sidebar-inner{display:none}
+  .sidebar{position:static; padding:0; border:none; box-shadow:none}
+  .sidebar-inner{display:none; padding:1.25rem; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); margin-top:.5rem; box-shadow:var(--shadow)}
   .sidebar-inner.open{display:block}
 
   /* FIX 2: Converts the metric row into a 2x2 grid box so it fits on mobile screens */
@@ -290,8 +290,9 @@ a{color:inherit;text-decoration:none}
   <div class="chips-row" id="chipsRow"></div>
   <div class="main">
     <!-- SIDEBAR -->
+   <button class="filter-toggle" onclick="toggleFilters(this)">⚙ Filters <span id="filterArrow">▼</span></button>
    <aside class="sidebar">
-      <button class="filter-toggle" onclick="toggleFilters(this)">⚙ Filters <span id="filterArrow">▼</span></button>
+      
       <div class="sidebar-inner" id="sidebarInner">
       <div class="sidebar-hdr">
         <span class="sidebar-hdr-title">Filters</span>
